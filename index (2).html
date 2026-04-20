@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorentia — Exploration Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-primary: #000080;
+    --navy-deep: #0A1F5C;
+    --navy-royal: #1A2F7A;
+    --navy-ink: #0D2149;
+    --teal-brand: #1E7A7A;
+    --teal-accent: #2EE8A0;
+    --paper: #FAF8F3;
+    --paper-warm: #F4EFE6;
+    --ink: #1A1A1A;
+    --ink-muted: #6B6B6B;
+    --rule: #D9D4C7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Fraunces', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 1;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(139, 119, 85, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(139, 119, 85, 0.02) 0%, transparent 50%);
+  }
+
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 2;
+  }
+
+  header {
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 64px;
+  }
+
+  .brand-mark {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-mark::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  h1.title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--navy-ink);
+    font-variation-settings: "opsz" 144;
+  }
+
+  h1.title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--navy-primary);
+  }
+
+  .meta {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.8;
+  }
+
+  .meta strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .intro {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 96px;
+    align-items: start;
+  }
+
+  .intro-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .intro-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  .intro-text em {
+    font-style: italic;
+    color: var(--navy-primary);
+  }
+
+  .gallery {
+    padding: 96px 0 64px;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    color: var(--navy-ink);
+    font-style: italic;
+  }
+
+  .section-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 32px;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-number {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
+    z-index: 2;
+  }
+
+  .logo-frame {
+    background: var(--paper-warm);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    transition: all 0.4s ease;
+  }
+
+  .card:hover .logo-frame {
+    background: #fff;
+    border-color: var(--navy-primary);
+  }
+
+  .logo-frame img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card:hover .logo-frame img {
+    transform: scale(1.03);
+  }
+
+  .logo-frame.teal-bg {
+    background: #1E7A7A;
+    border-color: #1E7A7A;
+  }
+
+  .card:hover .logo-frame.teal-bg {
+    background: #1A6B6B;
+    border-color: #1E7A7A;
+  }
+
+  .logo-frame.teal-bg img {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-info {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--navy-ink);
+    letter-spacing: -0.01em;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .card-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+
+  .hex-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0 0;
+    border-top: 1px solid var(--rule);
+    margin-top: 6px;
+  }
+
+  .swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  }
+
+  .hex-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    cursor: pointer;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+
+  .hex-code:hover {
+    color: var(--navy-primary);
+  }
+
+  .copy-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .hex-row:hover .copy-hint {
+    opacity: 1;
+  }
+
+  .copied {
+    color: var(--teal-brand) !important;
+  }
+
+  .palette-section {
+    padding: 96px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .palette-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .palette-swatch {
+    aspect-ratio: 4 / 5;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .palette-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .palette-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--navy-ink);
+  }
+
+  .palette-hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+  }
+
+  footer {
+    padding: 64px 0 48px;
+    border-top: 1px solid var(--rule);
+    margin-top: 64px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .footer-col strong {
+    display: block;
+    color: var(--ink);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .footer-col span {
+    display: block;
+    line-height: 1.8;
+  }
+
+  .signature {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--navy-primary);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 8px;
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.19s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+  .card:nth-child(5) { animation-delay: 0.33s; }
+  .card:nth-child(6) { animation-delay: 0.40s; }
+
+  @media (max-width: 960px) {
+    .container { padding: 0 24px; }
+    .header-grid { grid-template-columns: 1fr; gap: 32px; }
+    .meta { text-align: left; }
+    .intro { grid-template-columns: 1fr; gap: 24px; }
+    .intro-text { font-size: 17px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
+    .palette-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; }
+    h1.title { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="header-grid">
+      <div>
+        <div class="brand-mark fade-up">Identité de marque · Exploration logo</div>
+        <h1 class="title fade-up" style="animation-delay: 0.1s">Sorentia <em>— six directions</em></h1>
+      </div>
+      <div class="meta fade-up" style="animation-delay: 0.2s">
+        <div><strong>Client</strong> · Sorentia</div>
+        <div>Tout se loue</div>
+        <div>Round 01 · Avril 2026</div>
+        <div>Hidden Dune Agency</div>
+      </div>
+    </div>
+
+    <div class="intro fade-up" style="animation-delay: 0.3s">
+      <div class="intro-label">01 — À propos de ce round</div>
+      <p class="intro-text">
+        Six explorations autour d'un même signe — une forme ovale allongée, un point ponctué. Chaque variation joue sur le poids, les proportions et l'équilibre pour suggérer une personnalité différente : <em>premium, accessible, éditoriale, moderne</em>. L'objectif de ce round est d'identifier la direction qui incarne le mieux Sorentia avant de passer à l'étape d'affinement.
+      </p>
+    </div>
+  </header>
+
+  <section class="gallery">
+    <div class="section-header">
+      <h2 class="section-title">Directions logo</h2>
+      <span class="section-count">06 propositions</span>
+    </div>
+
+    <div class="grid">
+
+      <div class="card fade-up">
+        <span class="card-number">01 / 06</span>
+        <div class="logo-frame">
+          <img src="images/1.png" alt="Sorentia proposition logo 01">
+        </div>
+        <div class="card-info">
+          <div class="card-title">Signe intégré</div>
+          <div class="card-desc">Typographie intégrée — le wordmark s'inscrit dans la forme. Confiant, contenu, architectural.</div>
+          <div class="hex-row">
+            <span class="swatch" style="background: #000080;"></span>
+            <span class="hex-code" data-hex="#000080">#000080</span>
+            <span class="copy-hint">cliquer pour copier</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-up">
+        <span class="card-number">02 / 06</span>
+        <div class="logo-frame">
+          <img src="images/2.png" alt="Sorentia proposition logo 02">
+        </div>
+        <div class="card-info">
+          <div class="card-title">Aligné en haut, point plein</div>
+          <div class="card-desc">Bleu royal électrique. Le wordmark flotte au-dessus du signe — audacieux, moderne, esprit startup.</div>
+          <div class="hex-row">
+            <span class="swatch" style="background: #1A2F7A;"></span>
+            <span class="hex-code" data-hex="#1A2F7A">#1A2F7A</span>
+            <span class="copy-hint">cliquer pour copier</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-up">
+        <span class="card-number">03 / 06</span>
+        <div class="logo-frame">
+          <img src="images/3.png" alt="Sorentia proposition logo 03">
+        </div>
+        <div class="card-info">
+          <div class="card-title">Équilibré, point centré-bas</div>
+          <div class="card-desc">Forme en contour, point en milieu-bas. Wordmark en dessous — proportions intemporelles, esprit catalogue.</div>
+          <div class="hex-row">
+            <span class="swatch" style="background: #0D2149;"></span>
+            <span class="hex-code" data-hex="#0D2149">#0D2149</span>
+            <span class="copy-hint">cliquer pour copier</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-up">
+        <span class="card-number">04 / 06</span>
+        <div class="logo-frame">
+          <img src="images/4.png" alt="Sorentia proposition logo 04">
+        </div>
+        <div class="card-info">
+          <div class="card-title">Point en position haute</div>
+          <div class="card-desc">Le point se lit comme une tête — anthropomorphe, chaleureux, accueillant. Éditorial avec du caractère.</div>
+          <div class="hex-row">
+            <span class="swatch" style="background: #0D2149;"></span>
+            <span class="hex-code" data-hex="#0D2149">#0D2149</span>
+            <span class="copy-hint">cliquer pour copier</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-up">
+        <span class="card-number">05 / 06</span>
+        <div class="logo-frame">
+          <img src="images/5.png" alt="Sorentia proposition logo 05">
+        </div>
+        <div class="card-info">
+          <div class="card-title">Monogramme — S entrelacés</div>
+          <div class="card-desc">Double S imbriqué, traits en contour. Mémorable comme icône autonome pour application ou favicon.</div>
+          <div class="hex-row">
+            <span class="swatch" style="background: #0D2149;"></span>
+            <span class="hex-code" data-hex="#0D2149">#0D2149</span>
+            <span class="copy-hint">cliquer pour copier</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-up">
+        <span class="card-number">06 / 06</span>
+        <div class="logo-frame teal-bg">
+          <img src="images/6.png" alt="Sorentia proposition logo 06">
+        </div>
+        <div class="card-info">
+          <div class="card-title">Wordmark — sans-serif arrondi</div>
+          <div class="card-desc">Palette sarcelle + menthe. Plus doux, plus chaleureux, dans l'univers lifestyle / application de location.</div>
+          <div class="hex-row">
+            <span class="swatch" style="background: #1E7A7A;"></span>
+            <span class="hex-code" data-hex="#1E7A7A">#1E7A7A</span>
+            <span class="swatch" style="background: #2EE8A0; margin-left: 8px;"></span>
+            <span class="hex-code" data-hex="#2EE8A0">#2EE8A0</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="palette-section">
+    <div class="section-header">
+      <h2 class="section-title">Palette de couleurs — gamme complète</h2>
+      <span class="section-count">04 tons</span>
+    </div>
+
+    <div class="palette-grid">
+      <div class="palette-card">
+        <div class="palette-swatch" style="background: #000080;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Marine primaire</span>
+          <span class="palette-hex">#000080</span>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatch" style="background: #0D2149;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Marine encre</span>
+          <span class="palette-hex">#0D2149</span>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatch" style="background: #1E7A7A;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Sarcelle</span>
+          <span class="palette-hex">#1E7A7A</span>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatch" style="background: #2EE8A0;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Menthe — accent</span>
+          <span class="palette-hex">#2EE8A0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <strong>Prochaines étapes</strong>
+        <span>Choisir 01 ou 02 directions</span>
+        <span>Round d'affinement à suivre</span>
+      </div>
+      <div class="footer-col">
+        <strong>Retours client</strong>
+        <span>Cliquer sur un hex pour copier</span>
+        <span>Commentaires bienvenus</span>
+      </div>
+      <div class="footer-col">
+        <strong>Conçu par</strong>
+        <div class="signature">Hidden Dune Agency</div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.hex-code').forEach(el => {
+    el.addEventListener('click', async () => {
+      const hex = el.dataset.hex;
+      try {
+        await navigator.clipboard.writeText(hex);
+        const original = el.textContent;
+        el.textContent = '✓ copié';
+        el.classList.add('copied');
+        setTimeout(() => {
+          el.textContent = original;
+          el.classList.remove('copied');
+        }, 1400);
+      } catch (e) {
+        console.warn('Clipboard not available');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
